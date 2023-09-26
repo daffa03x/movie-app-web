@@ -7,7 +7,7 @@ import { usePage } from "@inertiajs/react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-export default function Genre({ auth, genre, no }) {
+export default function Genre({ auth, cast, no }) {
     const MySwal = withReactContent(Swal);
     const handleDelete = (id) => {
         MySwal.fire({
@@ -20,7 +20,7 @@ export default function Genre({ auth, genre, no }) {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(`/genre/delete/${id}`);
+                router.delete(`/cast/delete/${id}`);
             }
         });
     };
@@ -38,23 +38,23 @@ export default function Genre({ auth, genre, no }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Genre
+                    Cast
                 </h2>
             }
         >
-            <Head title="Genre" />
+            <Head title="Cast" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="px-6 pt-6 pb-3 text-gray-900 dark:text-gray-100">
                             <h2 className="text-2xl font-extrabold dark:text-white">
-                                Data Genre
+                                Data Cast
                             </h2>
                         </div>
                         <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
                         <div className="px-6 pb-3 text-gray-900 dark:text-gray-100">
-                            <LinkButton className="" href={`/genre/create`}>
+                            <LinkButton className="" href={`/cast/create`}>
                                 Create
                             </LinkButton>
                         </div>
@@ -67,7 +67,7 @@ export default function Genre({ auth, genre, no }) {
                                             className="border px-4 py-2"
                                             width="700"
                                         >
-                                            Genre
+                                            Cast
                                         </th>
                                         <th className="border px-4 py-2">
                                             Action
@@ -75,30 +75,30 @@ export default function Genre({ auth, genre, no }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {genre.map((gen) => (
-                                        <tr key={gen.name_genre}>
+                                    {cast.map((c) => (
+                                        <tr key={c.name_cast}>
                                             <td
                                                 className="border px-4 py-2"
-                                                key={gen.id}
+                                                key={c.id}
                                             >
                                                 {no++}
                                             </td>
                                             <td
                                                 className="border px-4 py-2"
-                                                key={gen.name_genre}
+                                                key={c.name_cast}
                                             >
-                                                {gen.name_genre}
+                                                {c.name_cast}
                                             </td>
                                             <td className="border px-4 py-2">
                                                 <LinkButton
                                                     className="ml-4 "
-                                                    href={`/genre/edit/${gen.id}`}
+                                                    href={`/cast/edit/${c.id}`}
                                                 >
                                                     Edit
                                                 </LinkButton>
                                                 <DangerButton
                                                     onClick={() =>
-                                                        handleDelete(gen.id)
+                                                        handleDelete(c.id)
                                                     }
                                                     className="ml-4"
                                                 >

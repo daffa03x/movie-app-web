@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cast extends Model
 {
-    use HasFactory;
+    protected $table = "cast";
+    protected $primaryKey = "id";
+    protected $keyType = "int";
+    public $timestamp = true;
+    public $incrementing = true;
+    protected $fillable = ['name_cast'];
 }

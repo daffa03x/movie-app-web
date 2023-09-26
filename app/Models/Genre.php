@@ -12,5 +12,5 @@ class Genre extends Model
     protected $keyType = "int";
     public $timestamp = true;
     public $incrementing = true;
-    protected $fillable = ['name'];
+    protected $fillable = ['name_genre'];
 }

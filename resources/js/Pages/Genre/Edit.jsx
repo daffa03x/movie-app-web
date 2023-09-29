@@ -4,6 +4,7 @@ import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
+import HeadCard from "@/Components/HeadCard";
 
 export default function EditGenre({ auth, genre }) {
     const { data, setData, put, processing, errors } = useForm({
@@ -30,12 +31,7 @@ export default function EditGenre({ auth, genre }) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="px-6 pt-6 pb-3 text-gray-900 dark:text-gray-100">
-                            <h2 className="text-2xl font-extrabold dark:text-white">
-                                Form Edit Genre
-                            </h2>
-                        </div>
-                        <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
+                        <HeadCard title="Form Edit Genre" />
                         <div className="px-6 pb-3 text-gray-900 dark:text-gray-100">
                             <form onSubmit={submit}>
                                 <div>

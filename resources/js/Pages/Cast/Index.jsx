@@ -1,13 +1,16 @@
 import DeleteButton from "@/Components/DeleteButton";
 import Toast from "@/Components/Toast";
-import LinkButton from "@/Components/LinkButton";
+import EditButton from "@/Components/EditButton";
 import Table from "@/Components/Table";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
-import { usePage } from "@inertiajs/react";
 import HeadCard from "@/Components/HeadCard";
+import CreateButton from "@/Components/CreateButton";
+import IconCreate from "@/Components/IconCreate";
+import IconEdit from "@/Components/IconEdit";
+import IconDelete from "@/Components/IconDelete";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Head, usePage } from "@inertiajs/react";
 
-export default function Genre({ auth, cast, no }) {
+export default function Cast({ auth, cast, no }) {
     const { flash } = usePage().props;
     {
         flash.message && Toast({ title: flash.message });
@@ -27,48 +30,36 @@ export default function Genre({ auth, cast, no }) {
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <HeadCard title="Data Cast" />
                         <div className="px-6 pb-3 text-gray-900 dark:text-gray-100">
-                            <LinkButton className="" href={`/cast/create`}>
-                                Create
-                            </LinkButton>
+                            <CreateButton className="" href={`/cast/create`}>
+                                Create <IconCreate />
+                            </CreateButton>
                         </div>
                         <Table>
                             <thead>
-                                <tr>
-                                    <th className="border px-4 py-2">No</th>
-                                    <th
-                                        className="border px-4 py-2"
-                                        width="700"
-                                    >
-                                        Cast
-                                    </th>
-                                    <th className="border px-4 py-2">Action</th>
+                                <tr className="[&>th]:p-2 bg-slate-700 text-left">
+                                    <th>No</th>
+                                    <th width="700">Cast</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {cast.map((c) => (
-                                    <tr key={c.id}>
-                                        <td
-                                            className="border px-4 py-2"
-                                            key={c.id}
-                                        >
-                                            {no++}
-                                        </td>
-                                        <td className="border px-4 py-2">
-                                            {c.name_cast}
-                                        </td>
-                                        <td className="border px-4 py-2">
-                                            <LinkButton
-                                                className="ml-4 "
+                                    <tr className="[&>td]:p-2" key={c.id}>
+                                        <td key={c.id}>{no++}</td>
+                                        <td>{c.name_cast}</td>
+                                        <td>
+                                            <EditButton
                                                 href={`/cast/edit/${c.id}`}
+                                                className=""
                                             >
-                                                Edit
-                                            </LinkButton>
+                                                <IconEdit />
+                                            </EditButton>
                                             <DeleteButton
                                                 id={c.id}
                                                 menu="cast"
                                                 className="ml-4"
                                             >
-                                                Hapus
+                                                <IconDelete />
                                             </DeleteButton>
                                         </td>
                                     </tr>

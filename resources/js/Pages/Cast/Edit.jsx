@@ -5,7 +5,7 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 
-export default function EditGenre({ auth, cast }) {
+export default function EditCast({ auth, cast }) {
     const { data, setData, put, processing, errors } = useForm({
         name_cast: cast.name_cast,
     });

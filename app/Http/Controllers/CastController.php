@@ -50,6 +50,7 @@ class CastController extends Controller
     // Action Edit Cast
     public function update(Request $request, $id): RedirectResponse
     {
+        $request->validate(['name_cast' => ['required','max:100']]);
         $cast = Cast::find($id);
         $cast->update([
             'name_cast' => $request->name_cast

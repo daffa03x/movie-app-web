@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "sweetalert2": "^11.7.29",
-        "sweetalert2-react-content": "^5.0.7"
+        "sweetalert2-react-content": "^5.0.7",
+        "tw-elements": "^1.0.0"
     }
 }

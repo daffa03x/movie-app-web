@@ -1,36 +1,33 @@
-import DangerButton from "@/Components/DangerButton";
+import DeleteButton from "@/Components/DeleteButton";
 import LinkButton from "@/Components/LinkButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { router } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
-export default function Genre({ auth, cast, no }) {
-    const MySwal = withReactContent(Swal);
-    const handleDelete = (id) => {
-        MySwal.fire({
-            title: "Are you sure?",
-            text: "Data Can Delete Permanent!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                router.delete(`/cast/delete/${id}`);
-            }
-        });
-    };
+import Swal from "sweetalert2";
+
+export default function Cast({ auth, cast, no }) {
+    const toastMixin = Swal.mixin({
+        toast: true,
+        icon: "success",
+        title: "General Title",
+        animation: false,
+        position: "top-right",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
+
     const { flash } = usePage().props;
     {
         flash.message &&
-            Swal.fire({
-                icon: "success",
-                title: "success",
-                text: flash.message,
+            toastMixin.fire({
+                animation: true,
+                title: flash.message,
             });
     }
     return (
@@ -76,17 +73,14 @@ export default function Genre({ auth, cast, no }) {
                                 </thead>
                                 <tbody>
                                     {cast.map((c) => (
-                                        <tr key={c.name_cast}>
+                                        <tr key={c.id}>
                                             <td
                                                 className="border px-4 py-2"
                                                 key={c.id}
                                             >
                                                 {no++}
                                             </td>
-                                            <td
-                                                className="border px-4 py-2"
-                                                key={c.name_cast}
-                                            >
+                                            <td className="border px-4 py-2">
                                                 {c.name_cast}
                                             </td>
                                             <td className="border px-4 py-2">
@@ -96,14 +90,13 @@ export default function Genre({ auth, cast, no }) {
                                                 >
                                                     Edit
                                                 </LinkButton>
-                                                <DangerButton
-                                                    onClick={() =>
-                                                        handleDelete(c.id)
-                                                    }
+                                                <DeleteButton
+                                                    id={c.id}
+                                                    menu="cast"
                                                     className="ml-4"
                                                 >
                                                     Hapus
-                                                </DangerButton>
+                                                </DeleteButton>
                                             </td>
                                         </tr>
                                     ))}

@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
 {
-    use HasFactory;
+    protected $table = "type";
+    protected $primaryKey = "id";
+    protected $keyType = "int";
+    public $timestamp = true;
+    public $incrementing = true;
+    protected $fillable = ['name_type'];
 }

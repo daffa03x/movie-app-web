@@ -38,7 +38,10 @@ export default function Cast({ auth, cast, no }) {
                             <thead>
                                 <tr className="[&>th]:p-2 bg-slate-700 text-left">
                                     <th>No</th>
-                                    <th width="700">Cast</th>
+                                    <th>Cast</th>
+                                    <th>Occupation</th>
+                                    <th>Date of Birth</th>
+                                    <th>Place of Birth</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -47,6 +50,9 @@ export default function Cast({ auth, cast, no }) {
                                     <tr className="[&>td]:p-2" key={c.id}>
                                         <td key={c.id}>{no++}</td>
                                         <td>{c.name_cast}</td>
+                                        <td>{c.occupation}</td>
+                                        <td>{c.date_of_birth}</td>
+                                        <td>{c.place_of_birth}</td>
                                         <td>
                                             <EditButton
                                                 href={`/cast/edit/${c.id}`}

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('cast', function (Blueprint $table) {
             $table->id();
             $table->string('name_cast',100)->nullable(false);
+            $table->string('occupation',50)->nullable();
+            $table->date('date_of_birth')->nullable(false);
+            $table->longText('place_of_birth')->nullable(false);
             $table->timestamps();
         });
     }

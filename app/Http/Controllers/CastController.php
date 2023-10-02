@@ -32,7 +32,10 @@ class CastController extends Controller
     public function store(Request $request): RedirectResponse
     {
         Cast::create($request->validate([
-            'name_cast' => ['required', 'max:100'],
+            'name_cast' => ['required','max:100'],
+            'occupation' => ['required'],
+            'date_of_birth' => ['date','required'],
+            'place_of_birth' => ['required']
           ]));
 
         return Redirect::to('/cast')->with('message','Success Create Cast!');
@@ -50,7 +53,12 @@ class CastController extends Controller
     // Action Edit Cast
     public function update(Request $request, $id): RedirectResponse
     {
-        $request->validate(['name_cast' => ['required','max:100']]);
+        $request->validate([
+            'name_cast' => ['required','max:100'],
+            'occupation' => ['required'],
+            'date_of_birth' => ['date','required'],
+            'place_of_birth' => ['required']
+    ]);
         $cast = Cast::find($id);
         $cast->update([
             'name_cast' => $request->name_cast

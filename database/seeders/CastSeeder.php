@@ -14,13 +14,22 @@ class CastSeeder extends Seeder
     public function run(): void
     {
         Cast::create([
-            'name_cast' => 'Tom Holland'
+            'name_cast' => 'Tom Holland',
+            'occupation' => 'Aktor',
+            'date_of_birth' => now(),
+            'place_of_birth' => 'Amerika'
         ]);
         Cast::create([
-            'name_cast' => 'Bae Suzy'
+            'name_cast' => 'Bae Suzy',
+            'occupation' => 'Aktris',
+            'date_of_birth' => now(),
+            'place_of_birth' => 'Korea'
         ]);
         Cast::create([
-            'name_cast' => 'Jisoo'
+            'name_cast' => 'Jisoo',
+            'occupation' => 'Aktris',
+            'date_of_birth' => now(),
+            'place_of_birth' => 'Korea'
         ]);
     }
 }

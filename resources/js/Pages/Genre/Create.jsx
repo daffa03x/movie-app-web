@@ -5,6 +5,7 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import HeadCard from "@/Components/HeadCard";
+import LinkButton from "@/Components/LinkButton";
 
 export default function CreateGenre({ auth }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -64,11 +65,17 @@ export default function CreateGenre({ auth }) {
 
                                 <div className="flex items-center justify-start mt-4">
                                     <PrimaryButton
-                                        className="mb-3"
+                                        className="mb-3 mt-2 me-4"
                                         disabled={processing}
                                     >
                                         Save
                                     </PrimaryButton>
+                                    <LinkButton
+                                        className="mb-3 mt-2"
+                                        href={"/genre"}
+                                    >
+                                        Back
+                                    </LinkButton>
                                 </div>
                             </form>
                         </div>

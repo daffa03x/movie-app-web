@@ -1,13 +1,13 @@
 import { Head, useForm } from "@inertiajs/react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
-import HeadCard from "@/Components/HeadCard";
-import LinkButton from "@/Components/LinkButton";
-import TextArea from "@/Components/TextArea";
-import DateInput from "@/Components/DateInput";
+import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
+import InputError from "@/Components/Admin/atoms/Input/InputError";
+import InputLabel from "@/Components/Admin/atoms/Input/InputLabel";
+import PrimaryButton from "@/Components/Admin/atoms/Button/PrimaryButton";
+import TextInput from "@/Components/Admin/atoms/Input/TextInput";
+import HeadCard from "@/Components/Admin/moleculs/HeadCard/HeadCard";
+import LinkButton from "@/Components/Admin/atoms/Button/LinkButton";
+import TextArea from "@/Components/Admin/atoms/Input/TextArea";
+import DateInput from "@/Components/Admin/atoms/Input/DateInput";
 
 export default function CreateCast({ auth }) {
     const { data, setData, post, processing, errors } = useForm({

@@ -1,10 +1,9 @@
-import Card from "@/Components/Card";
-import CreateButton from "@/Components/CreateButton";
-import IconCast from "@/Components/IconCast";
-import IconCreator from "@/Components/IconCreator";
-import IconGenre from "@/Components/IconGenre";
-import IconMovie from "@/Components/IconMovie";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Card from "@/Components/Admin/moleculs/Card/Card";
+import IconCast from "@/Components/Admin/atoms/Icon/IconCast";
+import IconCreator from "@/Components/Admin/atoms/Icon/IconCreator";
+import IconGenre from "@/Components/Admin/atoms/Icon/IconGenre";
+import IconMovie from "@/Components/Admin/atoms/Icon/IconMovie";
+import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
 export default function Dashboard({ auth, genre, cast }) {

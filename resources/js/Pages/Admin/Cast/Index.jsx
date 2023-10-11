@@ -1,13 +1,13 @@
-import DeleteButton from "@/Components/DeleteButton";
-import Toast from "@/Components/Toast";
-import EditButton from "@/Components/EditButton";
-import Table from "@/Components/Table";
-import HeadCard from "@/Components/HeadCard";
-import CreateButton from "@/Components/CreateButton";
-import IconCreate from "@/Components/IconCreate";
-import IconEdit from "@/Components/IconEdit";
-import IconDelete from "@/Components/IconDelete";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import DeleteButton from "@/Components/Admin/atoms/Button/DeleteButton";
+import Toast from "@/Components/Admin/atoms/Toast/Index";
+import EditButton from "@/Components/Admin/atoms/Button/EditButton";
+import Table from "@/Components/Admin/moleculs/Table/Table";
+import HeadCard from "@/Components/Admin/moleculs/HeadCard/HeadCard";
+import CreateButton from "@/Components/Admin/atoms/Button/CreateButton";
+import IconCreate from "@/Components/Admin/atoms/Icon/IconCreate";
+import IconEdit from "@/Components/Admin/atoms/Icon/IconEdit";
+import IconDelete from "@/Components/Admin/atoms/Icon/IconDelete";
+import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
 import { Head, usePage } from "@inertiajs/react";
 
 export default function Cast({ auth, cast, no }) {

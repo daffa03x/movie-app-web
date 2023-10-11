@@ -18,7 +18,7 @@ class GenreController extends Controller
     {
         $genre = Genre::all();
         $no = 1;
-        return Inertia::render('Genre/Index',[
+        return Inertia::render('Admin/Genre/Index',[
             'genre' => $genre,
             'no' => $no
         ]);
@@ -28,7 +28,7 @@ class GenreController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Genre/Create');
+        return Inertia::render('Admin/Genre/Create');
     }
 
     /**
@@ -51,7 +51,7 @@ class GenreController extends Controller
     public function edit($id): Response
     {
         $genre = Genre::find($id);
-        return Inertia::render('Genre/Edit',[
+        return Inertia::render('Admin/Genre/Edit',[
             'genre' => $genre
         ]);
     }

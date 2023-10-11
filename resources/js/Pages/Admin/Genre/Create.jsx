@@ -1,11 +1,11 @@
 import { Head, useForm } from "@inertiajs/react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
-import HeadCard from "@/Components/HeadCard";
-import LinkButton from "@/Components/LinkButton";
+import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
+import InputError from "@/Components/Admin/atoms/Input/InputError";
+import InputLabel from "@/Components/Admin/atoms/Input/InputLabel";
+import PrimaryButton from "@/Components/Admin/atoms/Button/PrimaryButton";
+import TextInput from "@/Components/Admin/atoms/Input/TextInput";
+import HeadCard from "@/Components/Admin/moleculs/HeadCard/HeadCard";
+import LinkButton from "@/Components/Admin/atoms/Button/LinkButton";
 
 export default function CreateGenre({ auth }) {
     const { data, setData, post, processing, errors } = useForm({

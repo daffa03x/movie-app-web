@@ -16,7 +16,7 @@ class CastController extends Controller
     {
         $no = 1;
         $cast = Cast::all();
-        return Inertia::render('Cast/Index',[
+        return Inertia::render('Admin/Cast/Index',[
             'cast' => $cast,
             'no' => $no
         ]);
@@ -25,7 +25,7 @@ class CastController extends Controller
     // View Create Cast
     public function create(): Response
     {
-        return Inertia::render('Cast/Create');
+        return Inertia::render('Admin/Cast/Create');
     }
 
     // Action Create Cast
@@ -45,7 +45,7 @@ class CastController extends Controller
     public function edit($id): Response
     {
         $cast = Cast::find($id);
-        return Inertia::render('Cast/Edit',[
+        return Inertia::render('Admin/Cast/Edit',[
             'cast' => $cast
         ]);
     }

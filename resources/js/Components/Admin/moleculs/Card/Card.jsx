@@ -1,4 +1,4 @@
-import LinkButton from "./LinkButton";
+import LinkButton from "../../atoms/Button/LinkButton";
 
 export default function Card({ className = "", children, title, body, link }) {
     return (

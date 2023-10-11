@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 export default function Toast({ title }) {
     const toastMixin = Swal.mixin({
         toast: true,
+        background: "#1f2933",
         icon: "success",
         title: "General Title",
         animation: false,

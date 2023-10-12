@@ -61,7 +61,10 @@ class CastController extends Controller
     ]);
         $cast = Cast::find($id);
         $cast->update([
-            'name_cast' => $request->name_cast
+            'name_cast' => $request->name_cast,
+            'occupation' => $request->occupation,
+            'date_of_birth' => $request->date_of_birth,
+            'place_of_birth' => $request->place_of_birth
         ]);
         return Redirect::to('/cast')->with('message','Success Update Cast!');
     }

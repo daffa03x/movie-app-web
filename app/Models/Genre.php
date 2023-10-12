@@ -13,4 +13,9 @@ class Genre extends Model
     public $timestamp = true;
     public $incrementing = true;
     protected $fillable = ['name_genre'];
+
+    public function movies()
+    {
+        return $this->belongsToMany(Movie::class, 'movie_genre', 'genre_id', 'movie_id');
+    }
 }

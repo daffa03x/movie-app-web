@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('movie', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('type_id');
             $table->string('name',255)->nullable(false);
-            $table->string('episode',50)->nullable();
             $table->date('release_date')->nullable(false);
             $table->integer('rating')->nullable();
             $table->string('duration')->nullable();
@@ -23,8 +21,6 @@ return new class extends Migration
             $table->string('link_trailer')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
-
-            $table->foreign("type_id")->on("type")->references("id");
         });
     }
 

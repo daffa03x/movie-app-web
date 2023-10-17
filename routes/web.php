@@ -21,18 +21,6 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
-
-// Route::group(function () {
-// });
-
 Route::get('/', [HomeController::class, 'index']);
 
 
@@ -81,6 +69,8 @@ Route::middleware('auth')->group(function () {
     // Movie
     Route::get('/movie', [MovieController::class, 'index'])
     ->name('movie.index');
+    Route::get('/movie/create', [MovieController::class, 'create'])
+    ->name('movie.create');
 });
 
 require __DIR__.'/auth.php';

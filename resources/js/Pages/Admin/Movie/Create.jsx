@@ -8,18 +8,22 @@ import LinkButton from "@/Components/Admin/atoms/Button/LinkButton";
 import TextArea from "@/Components/Admin/atoms/Input/TextArea";
 import DateInput from "@/Components/Admin/atoms/Input/DateInput";
 import FormCardTable from "@/Components/Admin/organism/CardTable/Form";
+import NumberInput from "@/Components/Admin/atoms/Input/NumberInput";
 
-export default function CreateCast({ auth }) {
+export default function CreateMovie({ auth, genre, cast }) {
     const { data, setData, post, processing, errors } = useForm({
-        name_cast: "",
-        date_of_birth: "",
-        occupation: "",
-        place_of_birth: "",
+        name: "",
+        release_date: "",
+        rating: "",
+        duration: "",
+        synopsis: "",
+        genre_id: "",
+        cast_id: "",
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post(route("cast.store"));
+        post(route("movie.store"));
     };
 
     return (
@@ -27,102 +31,116 @@ export default function CreateCast({ auth }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Create Cast
+                    Create Movie
                 </h2>
             }
         >
-            <Head title="Create Cast" />
-            <FormCardTable HeadCardTitle="Form Create Cast">
+            <Head title="Create Movie" />
+            <FormCardTable HeadCardTitle="Form Create Movie">
                 <form onSubmit={submit}>
                     <div className="grid grid-rows-2 grid-flow-col gap-1">
                         <div className="col-span-1">
-                            <InputLabel htmlFor="name_cast" value="Cast" />
-
+                            <InputLabel htmlFor="name" value="Movie" />
                             <TextInput
-                                id="name_cast"
-                                name="name_cast"
-                                value={data.name_cast}
+                                id="name"
+                                name="name"
+                                value={data.name}
                                 className="mt-1 block w-4/5"
-                                autoComplete="name_cast"
+                                autoComplete="name"
                                 isFocused={true}
                                 onChange={(e) =>
-                                    setData("name_cast", e.target.value)
+                                    setData("name", e.target.value)
                                 }
                                 required
                             />
 
                             <InputError
-                                message={errors.name_cast}
+                                message={errors.name}
                                 className="mt-2"
                             />
                         </div>
 
                         <div className="col-span-1">
                             <InputLabel
-                                htmlFor="date_of_birth"
-                                value="Date of Birth"
+                                htmlFor="release_date"
+                                value="Release Date"
                             />
                             <DateInput
-                                id="date_of_birth"
-                                name="date_of_birth"
-                                value={data.date_of_birth}
+                                id="release_date"
+                                name="release_date"
+                                value={data.release_date}
                                 className="mt-1 block w-4/5"
-                                autoComplete="date_of_birth"
+                                autoComplete="release_date"
                                 isFocused={true}
                                 onChange={(e) =>
-                                    setData("date_of_birth", e.target.value)
+                                    setData("release_date", e.target.value)
                                 }
                                 required
                             />
                             <InputError
-                                message={errors.date_of_birth}
+                                message={errors.release_date}
                                 className="mt-2"
                             />
                         </div>
 
                         <div className="col-span-1">
-                            <InputLabel
-                                htmlFor="occupation"
-                                value="Occupation"
-                            />
+                            <InputLabel htmlFor="rating" value="Rating" />
 
-                            <TextInput
-                                id="occupation"
-                                name="occupation"
-                                value={data.occupation}
+                            <NumberInput
+                                id="rating"
+                                name="rating"
+                                value={data.rating}
                                 className="mt-1 block w-4/5"
-                                autoComplete="occupation"
+                                autoComplete="rating"
                                 isFocused={true}
                                 onChange={(e) =>
-                                    setData("occupation", e.target.value)
+                                    setData("rating", e.target.value)
                                 }
                                 required
                             />
 
                             <InputError
-                                message={errors.occupation}
+                                message={errors.rating}
                                 className="mt-2"
                             />
                         </div>
-                        <div className="row-span-3">
-                            <InputLabel
-                                htmlFor="place_of_birth"
-                                value="Place of Birth"
+                        <div className="row-span-1">
+                            <InputLabel htmlFor="duration" value="Duration" />
+
+                            <NumberInput
+                                id="duration"
+                                name="duration"
+                                value={data.duration}
+                                className="mt-1 block w-4/5"
+                                autoComplete="duration"
+                                isFocused={true}
+                                onChange={(e) =>
+                                    setData("duration", e.target.value)
+                                }
+                                required
                             />
+
+                            <InputError
+                                message={errors.duration}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div className="row-span-2">
+                            <InputLabel htmlFor="synopsis" value="Synopsis" />
                             <TextArea
-                                id="place_of_birth"
-                                name="place_of_birth"
-                                value={data.place_of_birth}
+                                id="synopsis"
+                                name="synopsis"
+                                value={data.synopsis}
                                 rows="8"
                                 className="mt-1"
                                 isFocused={true}
                                 onChange={(e) =>
-                                    setData("place_of_birth", e.target.value)
+                                    setData("synopsis", e.target.value)
                                 }
                             />
 
                             <InputError
-                                message={errors.place_of_birth}
+                                message={errors.synopsis}
                                 className="mt-2"
                             />
                         </div>

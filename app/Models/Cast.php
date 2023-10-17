@@ -18,4 +18,8 @@ class Cast extends Model
     {
         return $this->belongsToMany(Movie::class, 'movie_cast', 'cast_id', 'movie_id');
     }
+    public function series()
+    {
+        return $this->belongsToMany(Series::class, 'series_cast', 'cast_id', 'series_id');
+    }
 }

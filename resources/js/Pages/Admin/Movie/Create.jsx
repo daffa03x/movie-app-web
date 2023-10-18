@@ -17,6 +17,8 @@ export default function CreateMovie({ auth, genre, cast }) {
         rating: "",
         duration: "",
         synopsis: "",
+        link_trailer: "",
+        image: "",
         genre_id: "",
         cast_id: "",
     });
@@ -38,8 +40,8 @@ export default function CreateMovie({ auth, genre, cast }) {
             <Head title="Create Movie" />
             <FormCardTable HeadCardTitle="Form Create Movie">
                 <form onSubmit={submit}>
-                    <div className="grid grid-rows-2 grid-flow-col gap-1">
-                        <div className="col-span-1">
+                    <div className="grid grid-cols-3 gap-3">
+                        <div className="">
                             <InputLabel htmlFor="name" value="Movie" />
                             <TextInput
                                 id="name"
@@ -60,7 +62,7 @@ export default function CreateMovie({ auth, genre, cast }) {
                             />
                         </div>
 
-                        <div className="col-span-1">
+                        <div className="">
                             <InputLabel
                                 htmlFor="release_date"
                                 value="Release Date"
@@ -83,7 +85,29 @@ export default function CreateMovie({ auth, genre, cast }) {
                             />
                         </div>
 
-                        <div className="col-span-1">
+                        <div className="">
+                            <InputLabel
+                                htmlFor="link_trailer"
+                                value="Link Trailer"
+                            />
+                            <TextInput
+                                id="link_trailer"
+                                name="link_trailer"
+                                value={data.link_trailer}
+                                className="mt-1 block w-4/5"
+                                autoComplete="link_trailer"
+                                isFocused={true}
+                                onChange={(e) =>
+                                    setData("link_trailer", e.target.value)
+                                }
+                            />
+                            <InputError
+                                message={errors.link_trailer}
+                                className="mt-2"
+                            />
+                        </div>
+
+                        <div className="">
                             <InputLabel htmlFor="rating" value="Rating" />
 
                             <NumberInput
@@ -104,9 +128,8 @@ export default function CreateMovie({ auth, genre, cast }) {
                                 className="mt-2"
                             />
                         </div>
-                        <div className="row-span-1">
+                        <div className="">
                             <InputLabel htmlFor="duration" value="Duration" />
-
                             <NumberInput
                                 id="duration"
                                 name="duration"
@@ -119,31 +142,30 @@ export default function CreateMovie({ auth, genre, cast }) {
                                 }
                                 required
                             />
-
                             <InputError
                                 message={errors.duration}
                                 className="mt-2"
                             />
                         </div>
-                        <div className="row-span-2">
-                            <InputLabel htmlFor="synopsis" value="Synopsis" />
-                            <TextArea
-                                id="synopsis"
-                                name="synopsis"
-                                value={data.synopsis}
-                                rows="8"
-                                className="mt-1"
-                                isFocused={true}
-                                onChange={(e) =>
-                                    setData("synopsis", e.target.value)
-                                }
-                            />
+                    </div>
+                    <div className="mt-4">
+                        <InputLabel htmlFor="synopsis" value="Synopsis" />
+                        <TextArea
+                            id="synopsis"
+                            name="synopsis"
+                            value={data.synopsis}
+                            rows="6"
+                            className="mt-1"
+                            isFocused={true}
+                            onChange={(e) =>
+                                setData("synopsis", e.target.value)
+                            }
+                        />
 
-                            <InputError
-                                message={errors.synopsis}
-                                className="mt-2"
-                            />
-                        </div>
+                        <InputError
+                            message={errors.synopsis}
+                            className="mt-2"
+                        />
                     </div>
                     <div className="flex items-center justify-start mt-4">
                         <PrimaryButton
@@ -152,7 +174,7 @@ export default function CreateMovie({ auth, genre, cast }) {
                         >
                             Save
                         </PrimaryButton>
-                        <LinkButton className="mb-3 mt-2" href={"/cast"}>
+                        <LinkButton className="mb-3 mt-2" href={"/movie"}>
                             Back
                         </LinkButton>
                     </div>

@@ -41,7 +41,6 @@ class GenreController extends Controller
         Genre::create($request->validate([
             'name_genre' => ['required', 'max:50'],
           ]));
-
         return Redirect::to('/genre')->with('message','Success Create Genre!');
     }
 

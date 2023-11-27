@@ -1,24 +1,36 @@
-import Swal from "sweetalert2";
+import { usePage } from "@inertiajs/react";
+import { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 
-export default function Toast({ title }) {
-    const toastMixin = Swal.mixin({
-        toast: true,
-        background: "#1f2933",
-        icon: "success",
-        title: "General Title",
-        animation: false,
-        position: "top-right",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener("mouseenter", Swal.stopTimer);
-            toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-    });
-    toastMixin.fire({
-        animation: true,
-        title: title,
-    });
+export default function Toast() {
+    const { flash } = usePage().props;
+    const toast = useToast();
+    useEffect(() => {
+        if (flash.message) {
+            const examplePromise = new Promise((resolve, reject) => {
+                setTimeout(() => resolve(200), 2000);
+            });
+
+            // Will display the loading toast until the promise is either resolved
+            // or rejected.
+            toast.promise(examplePromise, {
+                success: {
+                    title: "Success",
+                    description: flash.message,
+                    position: "top-right",
+                },
+                error: {
+                    title: "Error",
+                    description: flash.message,
+                    position: "top-right",
+                },
+                loading: {
+                    title: "Loading",
+                    description: "Please wait",
+                    position: "top-right",
+                },
+            });
+        }
+    }, [flash.message, toast]);
     return null;
 }

@@ -7,8 +7,13 @@ import CardTable from "@/Components/Admin/organism/CardTable/Index";
 import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { useState, useEffect } from "react";
-import { Spinner, Flex } from "@chakra-ui/react";
 import Pagination from "@/Components/Admin/atoms/Pagination/Index";
+import TableData from "@/Components/Admin/atoms/Table/Index";
+import TableHead from "@/Components/Admin/atoms/Table/TableHead";
+import { Th, Td, Tr, TableCaption } from "@chakra-ui/react";
+import TableBody from "@/Components/Admin/atoms/Table/TableBody";
+import Loading from "@/Components/Admin/atoms/Loading/Index";
+import CardNull from "@/Components/Admin/atoms/CardNull/Index";
 
 export default function Cast({ auth, cast, no, total }) {
     const [isLoading, setIsLoading] = useState(true);
@@ -30,42 +35,32 @@ export default function Cast({ auth, cast, no, total }) {
         >
             <Head title="Cast" />
             {isLoading ? (
-                <Flex
-                    height="100vh" // Tinggi sesuai kebutuhan
-                    width="100vw" // Lebar sesuai kebutuhan
-                    justify="center" // Mengatur posisi horizontal ke tengah
-                    align="center" // Mengatur posisi vertikal ke tengah
-                >
-                    <Spinner
-                        thickness="4px"
-                        speed="0.65s"
-                        emptyColor="gray.200"
-                        color="blue.500"
-                        size="xl"
-                    />
-                </Flex>
+                <Loading />
+            ) : cast.data.length === 0 ? (
+                <CardNull title="Cast" href="/cast/create" />
             ) : (
                 <CardTable HeadCardTitle="Data Cast" HrefCreate="/cast/create">
-                    <table className="w-full">
-                        <thead>
-                            <tr className="[&>th]:p-2 bg-slate-700 text-left">
-                                <th>No</th>
-                                <th>Cast</th>
-                                <th>Occupation</th>
-                                <th>Date of Birth</th>
-                                <th>Place of Birth</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <TableData>
+                        <TableCaption>
+                            <Pagination total={total} links={cast.links} />
+                        </TableCaption>
+                        <TableHead>
+                            <Th>No</Th>
+                            <Th>Cast</Th>
+                            <Th>Occupation</Th>
+                            <Th>Date Of Birth</Th>
+                            <Th>Place Of Birth</Th>
+                            <Th>Action</Th>
+                        </TableHead>
+                        <TableBody>
                             {cast.data.map((c) => (
-                                <tr className="[&>td]:p-2" key={c.id}>
-                                    <td key={c.id}>{no++}</td>
-                                    <td>{c.name_cast}</td>
-                                    <td>{c.occupation}</td>
-                                    <td>{c.date_of_birth}</td>
-                                    <td>{c.place_of_birth}</td>
-                                    <td>
+                                <Tr key={c.id}>
+                                    <Td>{no++}</Td>
+                                    <Td>{c.name_cast}</Td>
+                                    <Td>{c.occupation}</Td>
+                                    <Td>{c.date_of_birth}</Td>
+                                    <Td>{c.place_of_birth}</Td>
+                                    <Td>
                                         <EditButton
                                             href={`/cast/edit/${c.id}`}
                                             className=""
@@ -79,16 +74,11 @@ export default function Cast({ auth, cast, no, total }) {
                                         >
                                             <IconDelete />
                                         </DeleteButton>
-                                    </td>
-                                </tr>
+                                    </Td>
+                                </Tr>
                             ))}
-                        </tbody>
-                    </table>
-                    <Pagination
-                        className="mt-6"
-                        total={total}
-                        links={cast.links}
-                    />
+                        </TableBody>
+                    </TableData>
                 </CardTable>
             )}
         </AuthenticatedLayout>

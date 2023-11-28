@@ -4,11 +4,16 @@ import IconEdit from "@/Components/Admin/atoms/Icon/IconEdit";
 import IconDelete from "@/Components/Admin/atoms/Icon/IconDelete";
 import CardTable from "@/Components/Admin/organism/CardTable/Index";
 import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
-import { useState, useEffect } from "react";
-import { Spinner, Flex } from "@chakra-ui/react";
 import Toast from "@/Components/Admin/atoms/Toast/Index";
 import Pagination from "@/Components/Admin/atoms/Pagination/Index";
+import Loading from "@/Components/Admin/atoms/Loading/Index";
+import CardNull from "@/Components/Admin/atoms/CardNull/Index";
+import { Head } from "@inertiajs/react";
+import { useState, useEffect } from "react";
+import TableData from "@/Components/Admin/atoms/Table/Index";
+import TableHead from "@/Components/Admin/atoms/Table/TableHead";
+import { Th, Td, Tr, TableCaption } from "@chakra-ui/react";
+import TableBody from "@/Components/Admin/atoms/Table/TableBody";
 
 export default function Genre({ auth, genre, no, total }) {
     const [isLoading, setIsLoading] = useState(true);
@@ -30,39 +35,29 @@ export default function Genre({ auth, genre, no, total }) {
         >
             <Head title="Genre" />
             {isLoading ? (
-                <Flex
-                    height="100vh" // Tinggi sesuai kebutuhan
-                    width="100vw" // Lebar sesuai kebutuhan
-                    justify="center" // Mengatur posisi horizontal ke tengah
-                    align="center" // Mengatur posisi vertikal ke tengah
-                >
-                    <Spinner
-                        thickness="4px"
-                        speed="0.65s"
-                        emptyColor="gray.200"
-                        color="blue.500"
-                        size="xl"
-                    />
-                </Flex>
+                <Loading />
+            ) : genre.data.length === 0 ? (
+                <CardNull title="Genre" href="/genre/create" />
             ) : (
                 <CardTable
                     HeadCardTitle="Data Genre"
                     HrefCreate="/genre/create"
                 >
-                    <table className="w-full">
-                        <thead>
-                            <tr className="[&>th]:p-2 bg-slate-700 text-left">
-                                <th>No</th>
-                                <th width="700">Genre</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <TableData>
+                        <TableCaption>
+                            <Pagination total={total} links={genre.links} />
+                        </TableCaption>
+                        <TableHead>
+                            <Th>No</Th>
+                            <Th>Genre</Th>
+                            <Th>Action</Th>
+                        </TableHead>
+                        <TableBody>
                             {genre.data.map((g) => (
-                                <tr className="[&>td]:p-2" key={g.id}>
-                                    <td key={g.id}>{no++}</td>
-                                    <td>{g.name_genre}</td>
-                                    <td>
+                                <Tr key={g.id}>
+                                    <Td>{no++}</Td>
+                                    <Td>{g.name_genre}</Td>
+                                    <Td>
                                         <EditButton
                                             href={`/genre/edit/${g.id}`}
                                             className=""
@@ -76,16 +71,11 @@ export default function Genre({ auth, genre, no, total }) {
                                         >
                                             <IconDelete />
                                         </DeleteButton>
-                                    </td>
-                                </tr>
+                                    </Td>
+                                </Tr>
                             ))}
-                        </tbody>
-                    </table>
-                    <Pagination
-                        className="mt-6"
-                        total={total}
-                        links={genre.links}
-                    />
+                        </TableBody>
+                    </TableData>
                 </CardTable>
             )}
         </AuthenticatedLayout>

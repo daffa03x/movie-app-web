@@ -1,12 +1,11 @@
 import Card from "@/Components/Admin/moleculs/Card/Card";
 import IconCast from "@/Components/Admin/atoms/Icon/IconCast";
-import IconCreator from "@/Components/Admin/atoms/Icon/IconCreator";
 import IconGenre from "@/Components/Admin/atoms/Icon/IconGenre";
 import IconMovie from "@/Components/Admin/atoms/Icon/IconMovie";
 import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-export default function Dashboard({ auth, genre, cast }) {
+export default function Dashboard({ auth, genre, cast, movie, user }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -37,20 +36,20 @@ export default function Dashboard({ auth, genre, cast }) {
                         <IconCast className="w-12 h-12 text-gray-500 dark:text-gray-400 mb-4" />
                     </Card>
                     <Card
-                        title="Creator"
-                        className="flex-initial w-64 me-12"
-                        body={100}
-                        link={"/creator"}
-                    >
-                        <IconCreator className="w-12 h-12 text-gray-500 dark:text-gray-400 mb-4" />
-                    </Card>
-                    <Card
                         title="Movie"
-                        className="flex-initial w-64"
-                        body={100}
+                        className="flex-initial w-64 me-12"
+                        body={movie}
                         link={"/movie"}
                     >
                         <IconMovie className="w-12 h-12 text-gray-500 dark:text-gray-400 mb-4" />
+                    </Card>
+                    <Card
+                        title="User"
+                        className="flex-initial w-64"
+                        body={user}
+                        link={"/user"}
+                    >
+                        <IconCast className="w-12 h-12 text-gray-500 dark:text-gray-400 mb-4" />
                     </Card>
                 </div>
             </div>

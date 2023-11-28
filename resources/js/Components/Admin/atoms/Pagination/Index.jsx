@@ -9,7 +9,6 @@ export default function Pagination({ links, total }) {
             return "mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white focus:border-primary focus:text-primary";
         }
     }
-    console.log(links);
 
     return (
         links.length > 0 && (

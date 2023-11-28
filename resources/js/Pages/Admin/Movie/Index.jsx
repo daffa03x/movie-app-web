@@ -7,8 +7,14 @@ import CardTable from "@/Components/Admin/organism/CardTable/Index";
 import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { useState, useEffect } from "react";
-import { Spinner, Flex, Badge } from "@chakra-ui/react";
+import { Badge } from "@chakra-ui/react";
 import Pagination from "@/Components/Admin/atoms/Pagination/Index";
+import TableData from "@/Components/Admin/atoms/Table/Index";
+import TableHead from "@/Components/Admin/atoms/Table/TableHead";
+import { Th, Td, Tr, TableCaption } from "@chakra-ui/react";
+import TableBody from "@/Components/Admin/atoms/Table/TableBody";
+import Loading from "@/Components/Admin/atoms/Loading/Index";
+import CardNull from "@/Components/Admin/atoms/CardNull/Index";
 
 export default function Movie({ auth, movie, no, total }) {
     const [isLoading, setIsLoading] = useState(true);
@@ -30,43 +36,33 @@ export default function Movie({ auth, movie, no, total }) {
         >
             <Head title="Movie" />
             {isLoading ? (
-                <Flex
-                    height="100vh" // Tinggi sesuai kebutuhan
-                    width="100vw" // Lebar sesuai kebutuhan
-                    justify="center" // Mengatur posisi horizontal ke tengah
-                    align="center" // Mengatur posisi vertikal ke tengah
-                >
-                    <Spinner
-                        thickness="4px"
-                        speed="0.65s"
-                        emptyColor="gray.200"
-                        color="blue.500"
-                        size="xl"
-                    />
-                </Flex>
+                <Loading />
+            ) : movie.data.length === 0 ? (
+                <CardNull title="Movie" href="/movie/create" />
             ) : (
                 <CardTable
                     HeadCardTitle="Data Movie"
                     HrefCreate="/movie/create"
                 >
-                    <table className="w-full">
-                        <thead>
-                            <tr className="[&>th]:p-2 bg-slate-700 text-left">
-                                <th>No</th>
-                                <th>Movie</th>
-                                <th>Genre</th>
-                                <th>Cast</th>
-                                <th>Release Date</th>
-                                <th>Rating</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <TableData>
+                        <TableCaption>
+                            <Pagination total={total} links={movie.links} />
+                        </TableCaption>
+                        <TableHead>
+                            <Th>No</Th>
+                            <Th>Movie</Th>
+                            <Th>Genre</Th>
+                            <Th>Cast</Th>
+                            <Th>Release Date</Th>
+                            <Th>Rating</Th>
+                            <Th>Action</Th>
+                        </TableHead>
+                        <TableBody>
                             {movie.data.map((m) => (
-                                <tr className="[&>td]:p-2" key={m.id}>
-                                    <td key={m.id}>{no++}</td>
-                                    <td>{m.name}</td>
-                                    <td>
+                                <Tr key={m.id}>
+                                    <Td>{no++}</Td>
+                                    <Td>{m.name}</Td>
+                                    <Td>
                                         {m.genres.map((mg) => (
                                             <Badge
                                                 marginEnd={3}
@@ -76,8 +72,8 @@ export default function Movie({ auth, movie, no, total }) {
                                                 {mg.name_genre}
                                             </Badge>
                                         ))}
-                                    </td>
-                                    <td>
+                                    </Td>
+                                    <Td>
                                         {m.casts.map((mg) => (
                                             <Badge
                                                 marginEnd={3}
@@ -87,10 +83,11 @@ export default function Movie({ auth, movie, no, total }) {
                                                 {mg.name_cast}
                                             </Badge>
                                         ))}
-                                    </td>
-                                    <td>{m.release_date}</td>
-                                    <td>{m.rating}</td>
-                                    <td>
+                                    </Td>
+                                    <Td>{m.release_date}</Td>
+                                    <Td>{m.rating}</Td>
+
+                                    <Td>
                                         <EditButton
                                             href={`/movie/edit/${m.id}`}
                                             className=""
@@ -104,16 +101,11 @@ export default function Movie({ auth, movie, no, total }) {
                                         >
                                             <IconDelete />
                                         </DeleteButton>
-                                    </td>
-                                </tr>
+                                    </Td>
+                                </Tr>
                             ))}
-                        </tbody>
-                    </table>
-                    <Pagination
-                        className="mt-6"
-                        total={total}
-                        links={movie.links}
-                    />
+                        </TableBody>
+                    </TableData>
                 </CardTable>
             )}
         </AuthenticatedLayout>

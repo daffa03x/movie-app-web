@@ -19,5 +19,23 @@ class GenreSeeder extends Seeder
         Genre::create([
             'name_genre' => 'Horror'
         ]);
+        Genre::create([
+            'name_genre' => 'Thriller'
+        ]);
+        Genre::create([
+            'name_genre' => 'Comedy'
+        ]);
+        Genre::create([
+            'name_genre' => 'Drama'
+        ]);
+        Genre::create([
+            'name_genre' => 'Romance'
+        ]);
+        Genre::create([
+            'name_genre' => 'Fantasy'
+        ]);
+        Genre::create([
+            'name_genre' => 'Documenter'
+        ]);
     }
 }

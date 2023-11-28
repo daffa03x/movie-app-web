@@ -8,7 +8,7 @@ export default function Toast() {
     useEffect(() => {
         if (flash.message) {
             const examplePromise = new Promise((resolve, reject) => {
-                setTimeout(() => resolve(200), 2000);
+                setTimeout(() => resolve(200), 1000);
             });
 
             // Will display the loading toast until the promise is either resolved

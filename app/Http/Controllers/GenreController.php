@@ -16,11 +16,13 @@ class GenreController extends Controller
      */
     public function index(): Response
     {
-        $genre = Genre::all();
+        $genre = Genre::latest()->paginate(5);
+        $total = Genre::count();
         $no = 1;
         return Inertia::render('Admin/Genre/Index',[
             'genre' => $genre,
-            'no' => $no
+            'no' => $no,
+            'total' => $total
         ]);
     }
         /**

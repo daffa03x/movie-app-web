@@ -71,6 +71,8 @@ Route::middleware('auth')->group(function () {
     ->name('movie.index');
     Route::get('/movie/create', [MovieController::class, 'create'])
     ->name('movie.create');
+    Route::post('/movie/store', [MovieController::class, 'store'])
+    ->name('movie.store');
 });
 
 require __DIR__.'/auth.php';

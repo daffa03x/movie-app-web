@@ -8,14 +8,15 @@ import { Head } from "@inertiajs/react";
 import { useState, useEffect } from "react";
 import { Spinner, Flex } from "@chakra-ui/react";
 import Toast from "@/Components/Admin/atoms/Toast/Index";
+import Pagination from "@/Components/Admin/atoms/Pagination/Index";
 
-export default function Genre({ auth, genre, no }) {
+export default function Genre({ auth, genre, no, total }) {
     const [isLoading, setIsLoading] = useState(true);
     // Simulate loading effect with setTimeout
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 2000); // Delay 2 seconds for loading effect
+        }, 1000); // Delay 2 seconds for loading effect
     }, []);
     Toast();
     return (
@@ -57,7 +58,7 @@ export default function Genre({ auth, genre, no }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {genre.map((g) => (
+                            {genre.data.map((g) => (
                                 <tr className="[&>td]:p-2" key={g.id}>
                                     <td key={g.id}>{no++}</td>
                                     <td>{g.name_genre}</td>
@@ -80,6 +81,11 @@ export default function Genre({ auth, genre, no }) {
                             ))}
                         </tbody>
                     </table>
+                    <Pagination
+                        className="mt-6"
+                        total={total}
+                        links={genre.links}
+                    />
                 </CardTable>
             )}
         </AuthenticatedLayout>

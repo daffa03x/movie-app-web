@@ -15,10 +15,12 @@ class CastController extends Controller
     public function index(): Response
     {
         $no = 1;
-        $cast = Cast::all();
+        $cast = Cast::latest()->paginate(5);
+        $total = Cast::count();
         return Inertia::render('Admin/Cast/Index',[
             'cast' => $cast,
-            'no' => $no
+            'no' => $no,
+            'total' => $total
         ]);
     }
 

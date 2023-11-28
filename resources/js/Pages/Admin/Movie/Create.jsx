@@ -9,6 +9,7 @@ import TextArea from "@/Components/Admin/atoms/Input/TextArea";
 import DateInput from "@/Components/Admin/atoms/Input/DateInput";
 import FormCardTable from "@/Components/Admin/organism/CardTable/Form";
 import NumberInput from "@/Components/Admin/atoms/Input/NumberInput";
+import { Checkbox, CheckboxGroup, Stack } from "@chakra-ui/react";
 
 export default function CreateMovie({ auth, genre, cast }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -19,8 +20,8 @@ export default function CreateMovie({ auth, genre, cast }) {
         synopsis: "",
         link_trailer: "",
         image: "",
-        genre_id: "",
-        cast_id: "",
+        genre_id: [],
+        cast_id: [],
     });
 
     const submit = (e) => {
@@ -166,6 +167,84 @@ export default function CreateMovie({ auth, genre, cast }) {
                             message={errors.synopsis}
                             className="mt-2"
                         />
+                    </div>
+                    <div className="mt-4">
+                        <InputLabel htmlFor="genre_id" value="Genre" />
+                        <CheckboxGroup
+                            colorScheme="green"
+                            value={data.genre_id}
+                            onChange={(val) => setData("genre_id", val)}
+                        >
+                            <Stack
+                                spacing={[1, 5]}
+                                direction={["column", "row"]}
+                            >
+                                {genre.map((g) => (
+                                    <Checkbox
+                                        name="genre_id"
+                                        key={g.id}
+                                        value={g.id}
+                                        isChecked={data.genre_id.includes(g.id)} // Diceklis jika ada dalam data.genre_id
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                setData("genre_id", [
+                                                    ...data.genre_id,
+                                                    g.id,
+                                                ]);
+                                            } else {
+                                                setData(
+                                                    "genre_id",
+                                                    data.genre_id.filter(
+                                                        (id) => id !== g.id
+                                                    )
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        {g.name_genre}
+                                    </Checkbox>
+                                ))}
+                            </Stack>
+                        </CheckboxGroup>
+                    </div>
+                    <div className="mt-4">
+                        <InputLabel htmlFor="cast_id" value="Cast" />
+                        <CheckboxGroup
+                            colorScheme="green"
+                            value={data.cast_id}
+                            onChange={(val) => setData("cast_id", val)}
+                        >
+                            <Stack
+                                spacing={[1, 5]}
+                                direction={["column", "row"]}
+                            >
+                                {cast.map((c) => (
+                                    <Checkbox
+                                        name="cast_id"
+                                        key={c.id}
+                                        value={c.id}
+                                        isChecked={data.cast_id.includes(c.id)} // Diceklis jika ada dalam data.genre_id
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                setData("cast_id", [
+                                                    ...data.cast_id,
+                                                    c.id,
+                                                ]);
+                                            } else {
+                                                setData(
+                                                    "cast_id",
+                                                    data.cast_id.filter(
+                                                        (id) => id !== c.id
+                                                    )
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        {c.name_cast}
+                                    </Checkbox>
+                                ))}
+                            </Stack>
+                        </CheckboxGroup>
                     </div>
                     <div className="flex items-center justify-start mt-4">
                         <PrimaryButton

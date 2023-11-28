@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cast;
+use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,24 +15,31 @@ class MovieController extends Controller
 {
     public function index(): Response
     {
+        $total = Movie::count();
         $no = 1;
-        $movie = Movie::with(['genres','casts'])->get();
+        $movie = Movie::with(['genres','casts'])->latest()->paginate(5);
         return Inertia::render('Admin/Movie/Index',[
             'movie' => $movie,
-            'no' => $no
+            'no' => $no,
+            'total' => $total
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('Admin/Movie/Create');
+        $genre = Genre::all();
+        $cast = Cast::all();
+        return Inertia::render('Admin/Movie/Create',[
+            'cast' => $cast,
+            'genre' => $genre
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
         $movie = Movie::create($request->all());
-        $movie->genres()->sync($request->genres);
-        $movie->casts()->sync($request->casts);
+        $movie->genres()->sync($request->genre_id);
+        $movie->casts()->sync($request->cast_id);
         return Redirect::to('/movie')->with('message','Success Create Movie!');
     }
 }

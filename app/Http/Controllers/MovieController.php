@@ -25,6 +25,22 @@ class MovieController extends Controller
         ]);
     }
 
+    public function show($id): Response
+    {
+        $movie = Movie::with(['genres','casts'])->where('id',$id)->first();
+        return Inertia::render('Admin/Movie/Show',[
+            'movie' => $movie,
+        ]);
+    }
+
+    public function edit($id): Response
+    {
+        $movie = Movie::with(['genres','casts'])->where('id',$id)->first();
+        return Inertia::render('Admin/Movie/Edit',[
+            'movie' => $movie,
+        ]);
+    }
+
     public function create(): Response
     {
         $genre = Genre::all();
@@ -37,9 +53,35 @@ class MovieController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $movie = Movie::create($request->all());
-        $movie->genres()->sync($request->genre_id);
-        $movie->casts()->sync($request->cast_id);
-        return Redirect::to('/movie')->with('message','Success Create Movie!');
+        if($request->file('image')){
+            $image = $request->file('image');
+            $nama_photo = date('Ymd').$image->getClientOriginalName();
+            $image->move('image/movie/'.date('Y-m').'/', $nama_photo);
+            $photo = 'image/movie/'.date('Y-m') .'/'. $nama_photo;
+            $movie = Movie::create([
+                'name' => $request->name,
+                'release_date' => $request->release_date,
+                'rating' => $request->rating,
+                'duration' => $request->duration,
+                'synopsis' => $request->synopsis,
+                'link_trailer' => $request->link_trailer,
+                'image' => $photo,
+            ]);
+            $movie->genres()->sync($request->genre_id);
+            $movie->casts()->sync($request->cast_id);
+            return Redirect::to('/movie')->with('message','Success Create Movie!');
+        }else{
+            $movie = Movie::create([
+                'name' => $request->name,
+                'release_date' => $request->release_date,
+                'rating' => $request->rating,
+                'duration' => $request->duration,
+                'synopsis' => $request->synopsis,
+                'link_trailer' => $request->link_trailer,
+            ]);
+            $movie->genres()->sync($request->genre_id);
+            $movie->casts()->sync($request->cast_id);
+            return Redirect::to('/movie')->with('message','Success Create Movie!');
+        }
     }
 }

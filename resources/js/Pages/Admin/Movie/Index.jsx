@@ -22,7 +22,7 @@ export default function Movie({ auth, movie, no, total }) {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 1000); // Delay 2 seconds for loading effect
+        }, 500); // Delay 2 seconds for loading effect
     }, []);
     Toast();
     return (

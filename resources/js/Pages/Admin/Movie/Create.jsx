@@ -40,7 +40,7 @@ export default function CreateMovie({ auth, genre, cast }) {
         >
             <Head title="Create Movie" />
             <FormCardTable HeadCardTitle="Form Create Movie">
-                <form onSubmit={submit}>
+                <form onSubmit={submit} encType="multipart/form-data">
                     <div className="grid grid-cols-3 gap-3">
                         <div className="">
                             <InputLabel htmlFor="name" value="Movie" />
@@ -145,6 +145,29 @@ export default function CreateMovie({ auth, genre, cast }) {
                             />
                             <InputError
                                 message={errors.duration}
+                                className="mt-2"
+                            />
+                        </div>
+                        <div className="">
+                            <InputLabel htmlFor="image" value="Image" />
+                            <input
+                                type="file"
+                                name="image"
+                                id="image"
+                                className="text-black text-sm bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded w-4/5 mt-1"
+                                autoComplete="image"
+                                // value={data.image} <- Hapus bagian ini
+                                isFocused={true}
+                                onChange={
+                                    (e) => setData("image", e.target.files[0]) // Gunakan e.target.files[0]
+                                }
+                                required
+                            />
+                            <p class="text-xs text-gray-400 mt-2">
+                                PNG, JPG SVG, WEBP, and GIF are Allowed.
+                            </p>
+                            <InputError
+                                message={errors.image}
                                 className="mt-2"
                             />
                         </div>

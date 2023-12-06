@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GenreSeeder::class);
         $this->call(CastSeeder::class);
         $this->call(UserSeeder::class);
+        \App\Models\Movie::factory(200)->create();
+
     }
 }

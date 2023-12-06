@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         $genre = Genre::all();
         $total = Movie::count();
-        $movie = Movie::with(['genres','casts'])->latest()->paginate(12);
+        $movie = Movie::with(['genres','casts'])->latest()->paginate(9);
         return Inertia::render('Home/Main/Index',[
             'genre' => $genre,
             'movie' => $movie,
@@ -32,17 +32,41 @@ class HomeController extends Controller
         ]);
     }
 
-    public function search(Request $request): RedirectResponse
+    public function search(Request $request): Response
     {
-        $genre = $request->genre_id;
-        if($genre){
-            $movie = DB::table('movie_genre')
+        $search = $request->search;
+        $genre = Genre::all();
+        $total = Movie::count();
+        if($request->genre_id){
+            $movie_genre = DB::table('movie_genre')
                     ->select(
                         'movie_id',
                         'genre_id'
                     )
-                    ->where('genre_id',$genre)
+                    ->where('genre_id',$request->genre_id)
                     ->first();
-        }  
+            $movie = Movie::where('name','LIKE','%'.$search.'%')
+                            ->with(['genres','casts'])
+                            ->where('id',$movie_genre->movie_id)
+                            ->latest()
+                            ->paginate(12);
+            return Inertia::render('Home/Movie/Search',[
+                'genre' => $genre,
+                'movie' => $movie,
+                'total' => $total,
+                'search' => $search,
+            ]);
+        }else{
+            $movie = Movie::with(['genres','casts'])
+            ->where('name','LIKE','%'.$search.'%')
+            ->latest()
+            ->paginate(12);
+            return Inertia::render('Home/Movie/Search',[
+                'genre' => $genre,
+                'movie' => $movie,
+                'total' => $total,
+                'search' => $search,
+            ]);
+        }
     }
 }

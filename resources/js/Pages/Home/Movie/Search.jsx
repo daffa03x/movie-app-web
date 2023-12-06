@@ -35,7 +35,7 @@ export default function Index({ genre, movie, total }) {
                                     <Link href={`/home/movie/${m.id}`}>
                                         <figure>
                                             <img
-                                                src={m.image}
+                                                src={`/${m.image}`}
                                                 width={500}
                                                 alt="Shoes"
                                             />
@@ -72,7 +72,7 @@ export default function Index({ genre, movie, total }) {
                                             {m.genres.map((mg) => (
                                                 <div
                                                     key={mg.id}
-                                                    className="mt-4 badge badge-outline"
+                                                    className="badge badge-outline"
                                                 >
                                                     {mg.name_genre}
                                                 </div>

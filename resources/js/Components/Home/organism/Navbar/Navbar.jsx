@@ -3,7 +3,6 @@ import { Link, useForm } from "@inertiajs/react";
 export default function Navbar({ genre }) {
     const { data, setData, get } = useForm({
         search: "",
-        genre_id: "",
     });
     const submit = (e) => {
         e.preventDefault();
@@ -112,19 +111,6 @@ export default function Navbar({ genre }) {
                                 />
                             </div>
                         </div>
-                        <select
-                            className="select select-bordered join-item w-24"
-                            name="genre_id"
-                        >
-                            <option disabled selected>
-                                Filter
-                            </option>
-                            {genre.map((g) => (
-                                <option key={g.id} value={g.id}>
-                                    {g.name_genre}
-                                </option>
-                            ))}
-                        </select>
                         <div className="indicator">
                             <button className="btn join-item">Search</button>
                         </div>

@@ -21,8 +21,10 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-
+Route::get('/', [HomeController::class, 'index'])
+->name('home.main');
+Route::get('/search/movie', [HomeController::class, 'search'])
+->name('home.movie.search');
 
 Route::middleware('auth')->group(function () {
     // Dashboard

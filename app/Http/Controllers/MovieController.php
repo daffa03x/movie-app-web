@@ -99,4 +99,9 @@ class MovieController extends Controller
     {
         return Redirect::to('/movie')->with('message','Success Update Movie');
     }
+
+    public function destroy(Request $request, $id): RedirectResponse
+    {
+        return Redirect::to('/movie')->with('message','Success Delete Movie');
+    }
 }

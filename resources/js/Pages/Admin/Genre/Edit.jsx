@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
 import InputError from "@/Components/Admin/atoms/Input/InputError";
 import InputLabel from "@/Components/Admin/atoms/Input/InputLabel";
 import PrimaryButton from "@/Components/Admin/atoms/Button/PrimaryButton";
+import LinkButton from "@/Components/Admin/atoms/Button/LinkButton";
 import TextInput from "@/Components/Admin/atoms/Input/TextInput";
 import FormCardTable from "@/Components/Admin/organism/CardTable/Form";
 
@@ -52,9 +53,15 @@ export default function EditGenre({ auth, genre }) {
                     </div>
 
                     <div className="flex items-center justify-start mt-4">
-                        <PrimaryButton className="mb-3" disabled={processing}>
+                        <PrimaryButton
+                            className="mb-3 mt-2 me-4"
+                            disabled={processing}
+                        >
                             Save
                         </PrimaryButton>
+                        <LinkButton className="mb-3 mt-2" href={"/genre"}>
+                            Back
+                        </LinkButton>
                     </div>
                 </form>
             </FormCardTable>

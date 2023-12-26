@@ -1,5 +1,7 @@
 import { Head, useForm } from "@inertiajs/react";
 import Select from "react-select";
+import makeAnimated from "react-select/animated";
+import { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
 import InputError from "@/Components/Admin/atoms/Input/InputError";
 import InputLabel from "@/Components/Admin/atoms/Input/InputLabel";
@@ -11,7 +13,6 @@ import DateInput from "@/Components/Admin/atoms/Input/DateInput";
 import FormCardTable from "@/Components/Admin/organism/CardTable/Form";
 import NumberInput from "@/Components/Admin/atoms/Input/NumberInput";
 import { Checkbox, CheckboxGroup, Stack } from "@chakra-ui/react";
-import { useState } from "react";
 
 export default function CreateMovie({ auth, genre, cast }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -49,6 +50,8 @@ export default function CreateMovie({ auth, genre, cast }) {
         e.preventDefault();
         post(route("movie.store"));
     };
+
+    const animatedComponents = makeAnimated();
 
     return (
         <AuthenticatedLayout
@@ -149,6 +152,7 @@ export default function CreateMovie({ auth, genre, cast }) {
                                 className="mt-2"
                             />
                         </div>
+
                         <div className="">
                             <InputLabel htmlFor="duration" value="Duration" />
                             <NumberInput
@@ -168,6 +172,7 @@ export default function CreateMovie({ auth, genre, cast }) {
                                 className="mt-2"
                             />
                         </div>
+
                         <div className="">
                             <InputLabel htmlFor="image" value="Image" />
                             <input
@@ -211,6 +216,20 @@ export default function CreateMovie({ auth, genre, cast }) {
                         />
                     </div>
                     <div className="mt-4">
+                        <InputLabel htmlFor="cast_id" value="Cast" />
+                        <Select
+                            name="cast_id"
+                            options={castFormatted}
+                            value={selectedCast}
+                            onChange={handleCastChange}
+                            isClearable={true} // Menambahkan opsi untuk membersihkan pilihan
+                            isMulti={true}
+                            className="basic-multi-select"
+                            classNamePrefix="select"
+                            components={animatedComponents}
+                        />
+                    </div>
+                    <div className="mt-4">
                         <InputLabel htmlFor="genre_id" value="Genre" />
                         <CheckboxGroup
                             colorScheme="green"
@@ -248,17 +267,6 @@ export default function CreateMovie({ auth, genre, cast }) {
                                 ))}
                             </Stack>
                         </CheckboxGroup>
-                    </div>
-                    <div className="mt-4">
-                        <InputLabel htmlFor="cast_id" value="Cast" />
-                        <Select
-                            name="cast_id"
-                            options={castFormatted}
-                            value={selectedCast}
-                            onChange={handleCastChange}
-                            isClearable={true} // Menambahkan opsi untuk membersihkan pilihan
-                            isMulti={true}
-                        />
                     </div>
                     <div className="flex items-center justify-start mt-4">
                         <PrimaryButton

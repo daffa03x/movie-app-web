@@ -23,7 +23,7 @@ class MovieFactory extends Factory
             'duration' => rand(120,180),
             'synopsis' => fake()->sentence(5),
             'link_trailer' => fake()->url(),
-            'image' => 'image/movie/2023-12/cover.jpeg'
+            'image' => ' '
         ];
     }
 }

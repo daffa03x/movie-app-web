@@ -4,9 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,9 +21,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(GenreSeeder::class);
-        $this->call(CastSeeder::class);
+        // $this->call(CastSeeder::class);
         $this->call(UserSeeder::class);
-        \App\Models\Movie::factory(200)->create();
+        \App\Models\Cast::factory(100)->create();
+        // \App\Models\Movie::factory(200)->create();
 
     }
 }

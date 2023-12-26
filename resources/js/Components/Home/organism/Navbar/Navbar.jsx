@@ -37,9 +37,6 @@ export default function Navbar({ genre }) {
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                     >
                         <li>
-                            <Link href="/">Home</Link>
-                        </li>
-                        <li>
                             <Link href="/home/box-office">Box Office</Link>
                         </li>
                         <li>
@@ -68,9 +65,6 @@ export default function Navbar({ genre }) {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <Link href="/">Home</Link>
-                    </li>
-                    <li>
                         <Link href="/home/box-office">Box Office</Link>
                     </li>
                     <li>
@@ -98,7 +92,7 @@ export default function Navbar({ genre }) {
                         <div>
                             <div>
                                 <input
-                                    className="input input-bordered join-item w-48"
+                                    className="input input-bordered join-item w-36"
                                     placeholder="Search"
                                     autoComplete="search"
                                     value={data.search}

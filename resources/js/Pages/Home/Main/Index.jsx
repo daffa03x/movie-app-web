@@ -20,7 +20,7 @@ export default function Index({ genre, movie, total }) {
             {isLoading ? (
                 <Loading />
             ) : total === 0 ? (
-                <div className="text-4xl mt-48 text-center">
+                <div className="text-4xl my-72 text-center">
                     No Movie data available
                 </div>
             ) : (

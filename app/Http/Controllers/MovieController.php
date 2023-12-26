@@ -53,11 +53,20 @@ class MovieController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        $request->validate([
+            'name' => ['required','max:255','min:2'],
+            'release_date' => ['required','date'],
+            'rating' => ['required','numeric','min:1','max:100'],
+            'duration' => ['required','numeric','min:60','max:1440'],
+            'synopsis' => ['required'],
+            'link_trailer' => ['required','url'],
+            'image' => ['image','mimes:jpeg,png,jpg,gif,svg','max:51200']
+        ]);
         if($request->file('image')){
             $image = $request->file('image');
             $nama_photo = date('Ymd').$image->getClientOriginalName();
-            $image->move('image/movie/'.date('Y-m').'/', $nama_photo);
-            $photo = 'image/movie/'.date('Y-m') .'/'. $nama_photo;
+            $image->move('upload/movie/'.date('Y-m').'/', $nama_photo);
+            $photo = 'upload/movie/'.date('Y-m') .'/'. $nama_photo;
             $movie = Movie::create([
                 'name' => $request->name,
                 'release_date' => $request->release_date,
@@ -78,10 +87,16 @@ class MovieController extends Controller
                 'duration' => $request->duration,
                 'synopsis' => $request->synopsis,
                 'link_trailer' => $request->link_trailer,
+                'image' => ''
             ]);
             $movie->genres()->sync($request->genre_id);
             $movie->casts()->sync($request->cast_id);
             return Redirect::to('/movie')->with('message','Success Create Movie!');
         }
+    }
+
+    public function update(Request $request, $id): RedirectResponse
+    {
+        return Redirect::to('/movie')->with('message','Success Update Movie');
     }
 }

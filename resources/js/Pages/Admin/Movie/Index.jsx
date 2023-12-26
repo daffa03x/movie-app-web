@@ -26,14 +26,7 @@ export default function Movie({ auth, movie, no, total }) {
     }, []);
     Toast();
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Movie
-                </h2>
-            }
-        >
+        <AuthenticatedLayout user={auth.user}>
             <Head title="Movie" />
             {isLoading ? (
                 <Loading />

@@ -65,6 +65,9 @@ class GenreController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $genre = Genre::find($id);
+        $request->validate([
+            'name_genre' => ['required', 'max:50'],
+        ]);
         $genre->update([
             'name_genre' => $request->name_genre
         ]);

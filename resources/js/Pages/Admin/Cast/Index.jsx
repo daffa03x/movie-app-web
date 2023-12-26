@@ -25,14 +25,7 @@ export default function Cast({ auth, cast, no, total }) {
     }, []);
     Toast();
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Cast
-                </h2>
-            }
-        >
+        <AuthenticatedLayout user={auth.user}>
             <Head title="Cast" />
             {isLoading ? (
                 <Loading />

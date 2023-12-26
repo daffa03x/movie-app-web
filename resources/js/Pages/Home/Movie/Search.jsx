@@ -26,53 +26,37 @@ export default function Index({ genre, movie, total }) {
             ) : (
                 <section className="my-4">
                     <div className="px-4 mx-auto max-w-screen-xl">
-                        <div className="grid grid-rows-3 grid-flow-col gap-3">
+                        <div className="grid grid-cols-5 gap-3">
                             {movie.data.map((m) => (
                                 <div
                                     key={m.id}
-                                    className="mt-10 card w-96 bg-base-100 shadow-xl"
+                                    className="mt-10 card bg-base-100 shadow-xl"
+                                    style={{
+                                        width: "230px",
+                                        borderRadius: "20px",
+                                    }}
                                 >
                                     <Link href={`/home/movie/${m.id}`}>
                                         <figure>
                                             <img
-                                                src={`/${m.image}`}
-                                                width={500}
-                                                alt="Shoes"
+                                                style={{
+                                                    borderRadius: "20px",
+                                                    width: "230px",
+                                                    height: "325px",
+                                                }}
+                                                src={m.image}
+                                                alt="Movie Poster"
                                             />
                                         </figure>
                                     </Link>
-                                    <div className="card-body">
-                                        <h2 className="card-title flex justify-between">
-                                            <div>
-                                                <p>{m.name}</p>
-                                            </div>
-                                            <div>
-                                                <p className="mr-3">Rating</p>
-                                            </div>
-                                        </h2>
-                                        <div className="flex justify-between">
-                                            <div>
-                                                <p>{m.release_date}</p>
-                                                <Link
-                                                    className="btn btn-outline btn-info mt-3"
-                                                    href={m.link_trailer}
-                                                >
-                                                    Link Trailer
-                                                </Link>
-                                            </div>
-                                            <div
-                                                className="radial-progress text-info"
-                                                style={{ "--value": 70 }}
-                                                role="progressbar"
-                                            >
-                                                70%
-                                            </div>
-                                        </div>
-                                        <div className="card-actions justify-end">
+                                    <div className="card-body p-4">
+                                        <h2 className="card-title">{m.name}</h2>
+                                        <h2>{m.release_date}</h2>
+                                        <div className="card-action">
                                             {m.genres.map((mg) => (
                                                 <div
                                                     key={mg.id}
-                                                    className="badge badge-outline"
+                                                    className="badge badge-outline me-1"
                                                 >
                                                     {mg.name_genre}
                                                 </div>

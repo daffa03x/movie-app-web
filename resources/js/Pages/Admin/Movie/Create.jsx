@@ -1,4 +1,5 @@
 import { Head, useForm } from "@inertiajs/react";
+import Select from "react-select";
 import AuthenticatedLayout from "@/Layouts/Admin/AuthenticatedLayout";
 import InputError from "@/Components/Admin/atoms/Input/InputError";
 import InputLabel from "@/Components/Admin/atoms/Input/InputLabel";
@@ -10,6 +11,7 @@ import DateInput from "@/Components/Admin/atoms/Input/DateInput";
 import FormCardTable from "@/Components/Admin/organism/CardTable/Form";
 import NumberInput from "@/Components/Admin/atoms/Input/NumberInput";
 import { Checkbox, CheckboxGroup, Stack } from "@chakra-ui/react";
+import { useState } from "react";
 
 export default function CreateMovie({ auth, genre, cast }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -23,6 +25,25 @@ export default function CreateMovie({ auth, genre, cast }) {
         genre_id: [],
         cast_id: [],
     });
+
+    const castFormatted = cast.map((actor) => ({
+        value: actor.id,
+        label: actor.name_cast,
+    }));
+    const [selectedCast, setSelectedCast] = useState(null); // State untuk menyimpan pilihan cast
+
+    const handleCastChange = (selectedOptions) => {
+        // Mengekstrak nilai dari opsi yang dipilih
+        const selectedValues = selectedOptions
+            ? selectedOptions.map((option) => option.value)
+            : [];
+
+        // Menyimpan nilai yang dipilih ke state
+        setSelectedCast(selectedOptions);
+
+        // Mengatur nilai data untuk cast_id
+        setData("cast_id", selectedValues);
+    };
 
     const submit = (e) => {
         e.preventDefault();
@@ -74,7 +95,6 @@ export default function CreateMovie({ auth, genre, cast }) {
                                 value={data.release_date}
                                 className="mt-1 block w-4/5"
                                 autoComplete="release_date"
-                                isFocused={true}
                                 onChange={(e) =>
                                     setData("release_date", e.target.value)
                                 }
@@ -156,14 +176,13 @@ export default function CreateMovie({ auth, genre, cast }) {
                                 id="image"
                                 className="text-black text-sm bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded w-4/5 mt-1"
                                 autoComplete="image"
-                                // value={data.image} <- Hapus bagian ini
                                 isFocused={true}
                                 onChange={
                                     (e) => setData("image", e.target.files[0]) // Gunakan e.target.files[0]
                                 }
                                 required
                             />
-                            <p class="text-xs text-gray-400 mt-2">
+                            <p className="text-xs text-gray-400 mt-2">
                                 PNG, JPG SVG, WEBP, and GIF are Allowed.
                             </p>
                             <InputError
@@ -232,42 +251,14 @@ export default function CreateMovie({ auth, genre, cast }) {
                     </div>
                     <div className="mt-4">
                         <InputLabel htmlFor="cast_id" value="Cast" />
-                        <CheckboxGroup
-                            colorScheme="green"
-                            value={data.cast_id}
-                            onChange={(val) => setData("cast_id", val)}
-                        >
-                            <Stack
-                                spacing={[1, 5]}
-                                direction={["column", "row"]}
-                            >
-                                {cast.map((c) => (
-                                    <Checkbox
-                                        name="cast_id"
-                                        key={c.id}
-                                        value={c.id}
-                                        isChecked={data.cast_id.includes(c.id)} // Diceklis jika ada dalam data.genre_id
-                                        onChange={(e) => {
-                                            if (e.target.checked) {
-                                                setData("cast_id", [
-                                                    ...data.cast_id,
-                                                    c.id,
-                                                ]);
-                                            } else {
-                                                setData(
-                                                    "cast_id",
-                                                    data.cast_id.filter(
-                                                        (id) => id !== c.id
-                                                    )
-                                                );
-                                            }
-                                        }}
-                                    >
-                                        {c.name_cast}
-                                    </Checkbox>
-                                ))}
-                            </Stack>
-                        </CheckboxGroup>
+                        <Select
+                            name="cast_id"
+                            options={castFormatted}
+                            value={selectedCast}
+                            onChange={handleCastChange}
+                            isClearable={true} // Menambahkan opsi untuk membersihkan pilihan
+                            isMulti={true}
+                        />
                     </div>
                     <div className="flex items-center justify-start mt-4">
                         <PrimaryButton

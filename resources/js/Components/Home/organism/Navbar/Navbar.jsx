@@ -65,7 +65,7 @@ export default function Navbar({ genre }) {
                     Movie App
                 </Link>
             </div>
-            <div className="navbar-center hidden mr-36 lg:flex">
+            <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
                         <Link href="/">Home</Link>

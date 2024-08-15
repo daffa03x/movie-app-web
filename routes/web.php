@@ -75,6 +75,12 @@ Route::middleware('auth')->group(function () {
     ->name('movie.create');
     Route::post('/movie/store', [MovieController::class, 'store'])
     ->name('movie.store');
+    Route::get('/movie/edit/{id}', [MovieController::class, 'edit'])
+    ->name('movie.edit');
+    Route::put('/movie/update/{id}', [MovieController::class, 'update'])
+    ->name('movie.update');
+    Route::delete('/movie/delete/{id}', [MovieController::class, 'destroy'])
+    ->name('movie.delete');
 });
 
 require __DIR__.'/auth.php';

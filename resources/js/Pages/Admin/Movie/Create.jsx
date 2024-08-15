@@ -232,7 +232,6 @@ export default function CreateMovie({ auth, genre, cast }) {
                     <div className="mt-4">
                         <InputLabel htmlFor="genre_id" value="Genre" />
                         <CheckboxGroup
-                            colorScheme="green"
                             value={data.genre_id}
                             onChange={(val) => setData("genre_id", val)}
                         >

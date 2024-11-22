@@ -62,7 +62,6 @@ export default function Movie({ auth, movie, no, total }) {
                                                 marginEnd={3}
                                                 rounded={5}
                                                 colorScheme="purple"
-                                                key={mg.id}
                                             >
                                                 {mg.name_genre}
                                             </Badge>
@@ -75,7 +74,6 @@ export default function Movie({ auth, movie, no, total }) {
                                                 marginEnd={3}
                                                 rounded={5}
                                                 colorScheme="blue"
-                                                key={mg.id}
                                             >
                                                 {mg.name_cast}
                                             </Badge>

@@ -51,13 +51,14 @@ export default function Movie({ auth, movie, no, total }) {
                             <Th>Action</Th>
                         </TableHead>
                         <TableBody>
-                            {movie.data.map((m) => (
-                                <Tr key={m.id}>
+                            {movie.data.map((m, index) => (
+                                <Tr key={index}>
                                     <Td>{no++}</Td>
                                     <Td>{m.name}</Td>
                                     <Td>
-                                        {m.genres.map((mg) => (
+                                        {m.genres.map((mg, index) => (
                                             <Badge
+                                                key={index}
                                                 marginEnd={3}
                                                 rounded={5}
                                                 colorScheme="purple"
@@ -67,8 +68,9 @@ export default function Movie({ auth, movie, no, total }) {
                                         ))}
                                     </Td>
                                     <Td>
-                                        {m.casts.map((mg) => (
+                                        {m.casts.map((mg, index) => (
                                             <Badge
+                                                key={index}
                                                 marginEnd={3}
                                                 rounded={5}
                                                 colorScheme="blue"

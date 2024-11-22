@@ -17,6 +17,7 @@ import TableBody from "@/Components/Admin/atoms/Table/TableBody";
 
 export default function Genre({ auth, genre, no, total }) {
     const [isLoading, setIsLoading] = useState(true);
+    const [sort, setSort] = useState("");
     // Simulate loading effect with setTimeout
     useEffect(() => {
         setTimeout(() => {

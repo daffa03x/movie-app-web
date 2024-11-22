@@ -39,11 +39,11 @@ export default function Index({ genre, movie, total }) {
                                     <Link href={`/home/movie/${m.id}`}>
                                         <figure>
                                             <img
-                                                style={{
-                                                    borderRadius: "20px",
-                                                    width: "230px",
-                                                    height: "325px",
-                                                }}
+                                                // style={{
+                                                //     borderRadius: "20px",
+                                                //     width: "230px",
+                                                //     height: "325px",
+                                                // }}
                                                 src={m.image}
                                                 alt="Movie Poster"
                                             />
@@ -53,14 +53,7 @@ export default function Index({ genre, movie, total }) {
                                         <h2 className="card-title">{m.name}</h2>
                                         <h2>{m.release_date}</h2>
                                         <div className="card-action">
-                                            {m.genres.map((mg) => (
-                                                <div
-                                                    key={mg.id}
-                                                    className="badge badge-outline me-1"
-                                                >
-                                                    {mg.name_genre}
-                                                </div>
-                                            ))}
+                                            <p>Rating : {m.rating}%</p>
                                         </div>
                                     </div>
                                 </div>

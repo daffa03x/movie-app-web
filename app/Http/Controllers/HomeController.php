@@ -10,17 +10,24 @@ use Inertia\Response;
 
 class HomeController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $page = $request->input("page", 1);
+        $limit = 5; // Jumlah data per halaman
+        $offset = ($page - 1) * $limit;
+    
         $genre = Genre::all();
         $total = Movie::count();
-        $movie = Movie::with(['genres','casts'])->latest()->paginate(15);
-        return Inertia::render('Home/Main/Index',[
+        $movies = Movie::with(['genres', 'casts'])->latest()->offset($offset)->limit($limit)->get();
+    
+        return Inertia::render('Home/Main/Index', [
             'genre' => $genre,
-            'movie' => $movie,
-            'total' => $total
+            'movies' => $movies,
+            'total' => $total,
+            'page' => $page,
         ]);
     }
+    
 
     public function movie(): Response
     {

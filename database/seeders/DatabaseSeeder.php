@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(GenreSeeder::class);
-        // $this->call(CastSeeder::class);
+        $this->call(CastSeeder::class);
         $this->call(UserSeeder::class);
         \App\Models\Cast::factory(100)->create();
-        // \App\Models\Movie::factory(200)->create();
+        \App\Models\Movie::factory(200)->create();
 
     }
 }
